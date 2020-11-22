@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Repro.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = false, GroupName = nameof(HomeController))]
+    [Route("Home")]
     public class HomeController : Controller
     {
-        public string Index()
+        [HttpGet]
+        public string? Index()
         {
-            return "Hello !";
+            if (new Random().Next(100) > 50)
+            {
+                return "Hello !";
+            }
+
+            return null;
         }
     }
 }
